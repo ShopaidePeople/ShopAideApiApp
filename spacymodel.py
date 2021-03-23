@@ -104,7 +104,7 @@ class SpacyModel(object):
 
     def modelPreparation(self,model=None, new_model_name='new_model', output_dir=None, n_iter=10):
         """Setting up the pipeline and entity recognizer, and training the new entity."""
-        with open ("E:/finalYearProject/code/testing_data_out.py", 'rb') as fp:
+        with open ("./testing_data_out.py", 'rb') as fp:
             TRAIN_DATA = pickle.load(fp)
 
         if model is not None:
