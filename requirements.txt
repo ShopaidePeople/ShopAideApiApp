@@ -33,3 +33,4 @@ uuid==1.30
 wasabi==0.8.2
 Werkzeug==1.0.1
 zipp==3.4.1
+gunicorn==20.0.4
