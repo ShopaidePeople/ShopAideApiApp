@@ -2,8 +2,8 @@ from flask import Flask, render_template, request, session
 import speech_recognition as sr
 import json
 import requests
-from pygame import mixer 
-from pydub import AudioSegment
+#from pygame import mixer 
+#from pydub import AudioSegment
 
 from flask import Blueprint
 import uuid
