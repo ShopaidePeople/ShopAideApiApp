@@ -32,7 +32,8 @@ def speechToTextFunc():
         #print(text)
         #return text
         audio_file=None
-        audio_file = request.files['file']
+        audio_file = request.form['file']
+        console.log(audio_file)
         if(audio_file==None):
             return flask.jsonify({"result":"Sorry"})
         text="Dummy"
