@@ -34,7 +34,7 @@ def speechToTextFunc():
         audio_file=None
         audio_file = request.files['file']
         if(audio_file==None):
-            return "Sorry"
+            return flask.jsonify({"result":"Sorry"})
         text="Dummy"
         with sr.AudioFile(audio_file) as source:
             # listen for the data (load audio to memory)
@@ -42,9 +42,9 @@ def speechToTextFunc():
             # recognize (convert from speech to text)
             text = r.recognize_google(audio_data,language="hi")
             print(text)
-        return text
+        return flask.jsonify({"result":text})
     elif request.method == 'GET':
-        return 'get method received' 
+        return flask.jsonify({"result":"get method received"}) 
     
     
 
