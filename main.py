@@ -25,7 +25,7 @@ def hello_world():
 
 @app.route('/speechToText',methods=['GET','POST'])
 def speechToTextFunc():
-    console.log(request)
+    print(request)
     if request.method == 'POST':
         r = sr.Recognizer()
         #audio_data = request.json
@@ -34,7 +34,6 @@ def speechToTextFunc():
         #return text
         audio_file=None
         audio_file = request.form['file']
-        console.log(audio_file)
         if(audio_file==None):
             return flask.jsonify({"result":"Sorry"})
         text="Dummy"
