@@ -23,29 +23,22 @@ app.secret_key="good"
 def hello_world():
     return "HI"
 
-@app.route('/speechToText',methods=['GET','POST'])
+@app.route('/speechToText',methods=['POST'])
 def speechToTextFunc():
-    if request.method == 'POST':
-        r = sr.Recognizer()
-        #audio_data = request.json
-        #text = r.recognize_google(audio_data,language="en-IN")
-        #print(text)
-        #return text
-        audio_file=None
-        audio_file = request.form['file']
-        print("file recieved".format(audio_file))
-        if(audio_file==None):
-            return flask.jsonify({"result":"Sorry"})
-        text="Dummy"
-        with sr.AudioFile(audio_file) as source:
-            # listen for the data (load audio to memory)
+    r = sr.Recognizer()
+    audio_file=None
+    audio_file = request.form['file']
+    print("file recieved".format(audio_file))
+    if(audio_file==None):
+        return flask.jsonify({"result":"Sorry"})
+    text="Dummy"
+    with sr.AudioFile(audio_file) as source:
+        # listen for the data (load audio to memory)
             audio_data = r.record(source)
             # recognize (convert from speech to text)
             text = r.recognize_google(audio_data,language="en-IN")
-            print(text)
-        return flask.jsonify({"result":text})
-    elif request.method == 'GET':
-        return flask.jsonify({"result":"get method received"}) 
+    print(text)
+    return flask.jsonify({"result":text})
     
     
 
