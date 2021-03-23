@@ -25,7 +25,7 @@ def hello_world():
 
 @app.route('/speechToText',methods=['GET','POST'])
 def speechToTextFunc():
-    print(request.form['file'])
+    print(request.form)
     if request.method == 'POST':
         r = sr.Recognizer()
         #audio_data = request.json
