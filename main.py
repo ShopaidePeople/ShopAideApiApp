@@ -28,7 +28,7 @@ def speechToTextFunc():
     if request.method == 'POST':
         r = sr.Recognizer()
         #audio_data = request.json
-        #text = r.recognize_google(audio_data,language="hi")
+        #text = r.recognize_google(audio_data,language="en-IN")
         #print(text)
         #return text
         audio_file=None
