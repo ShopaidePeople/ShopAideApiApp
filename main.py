@@ -41,7 +41,7 @@ def speechToTextFunc():
             # recognize (convert from speech to text)
             text = r.recognize_google(audio_data,language="en-IN")
     print(text)
-    return flask.jsonify({"result":text})
+    return text
     
     
 
