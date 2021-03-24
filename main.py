@@ -30,7 +30,7 @@ def speechToTextFunc():
         print("FORM DATA RECEIVED")
 
         if "file" not in request.files:
-            return return flask.jsonify({"result" : "error" })
+            return flask.jsonify({"result" : "error" })
 
         file = request.files["file"]
      
