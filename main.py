@@ -25,22 +25,39 @@ def hello_world():
 
 @app.route('/speechToText',methods=['POST'])
 def speechToTextFunc():
-    text="hello"
-    r = sr.Recognizer()
-    audio_file=None
-    audio_file = request.files['file'].read()
-    print(request.files['file'], " ", audio_file)
-    print("file recieved".format(audio_file))
-    if(audio_file==None):
-        return flask.jsonify({"result":"Sorry"})
-    text="Dummy"
-    with sr.AudioFile(audio_file[0]) as source:
-        # listen for the data (load audio to memory)
-            audio_data = r.record(source)
-            # recognize (convert from speech to text)
-            text = r.recognize_google(audio_data,language="en-IN")
-    print(text)
-    return flask.jsonify({"result":text})
+    transcript = ""
+    if request.method == 'POST':
+        print("FORM DATA RECEIVED")
+
+        if "file" not in request.files:
+            return return flask.jsonify({"result" : "error" })
+
+        file = request.files["file"]
+     
+        if file:
+            recognizer = sr.Recognizer()
+            audioFile = sr.AudioFile(file)
+            with audioFile as source:
+                data = recognizer.record(source)
+            transcript = recognizer.recognize_google(data, language="en-IN")
+
+    return flask.jsonify({"result":transcript})
+#     text="hello"
+#     r = sr.Recognizer()
+#     audio_file=None
+#     audio_file = request.files['file']
+#     print(request.files['file'], " ", audio_file)
+#     print("file recieved".format(audio_file))
+#     if(audio_file==None):
+#         return flask.jsonify({"result":"Sorry"})
+#     text="Dummy"
+#     with sr.AudioFile(audio_file) as source:
+#         # listen for the data (load audio to memory)
+#             audio_data = r.record(source)
+#             # recognize (convert from speech to text)
+#             text = r.recognize_google(audio_data,language="en-IN")
+#     print(text)
+#     return flask.jsonify({"result":text})
     
     
 
