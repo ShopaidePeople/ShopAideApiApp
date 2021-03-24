@@ -28,7 +28,7 @@ def speechToTextFunc():
     text="hello"
     r = sr.Recognizer()
     audio_file=None
-    audio_file = request.files['file'].filename
+    audio_file = request.files['file']
     print(request.files['file'], " ", audio_file)
     print("file recieved".format(audio_file))
     if(audio_file==None):
