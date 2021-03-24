@@ -28,7 +28,7 @@ def speechToTextFunc():
     text="hello"
     r = sr.Recognizer()
     audio_file=None
-    audio_file = request.form['file']
+    audio_file = request.files['file']
     print("file recieved".format(audio_file))
     if(audio_file==None):
         return flask.jsonify({"result":"Sorry"})
