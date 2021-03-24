@@ -28,13 +28,13 @@ def speechToTextFunc():
     text="hello"
     r = sr.Recognizer()
     audio_file=None
-    audio_file = request.files['file'].filename
+    audio_file = request.form['file']
     print(request.files['file'], " ", audio_file)
     print("file recieved".format(audio_file))
     if(audio_file==None):
         return flask.jsonify({"result":"Sorry"})
     text="Dummy"
-    with sr.AudioFile(audio_file) as source:
+    with sr.AudioFile(audio_file[0]) as source:
         # listen for the data (load audio to memory)
             audio_data = r.record(source)
             # recognize (convert from speech to text)
