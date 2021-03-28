@@ -20,7 +20,7 @@ pymongo==3.11.3
 pyparsing==2.4.7
 requests==2.25.1
 smart-open==3.0.0
-spacy==3.0.5
+spacy==3.0.1
 spacy-legacy==3.0.1
 SpeechRecognition==3.8.1
 srsly==2.4.0
