@@ -92,7 +92,7 @@
   "company":"flipkart",
   "product":"mobile phone,smart phone,phone,mobile",
   "brand":"samsung",
-  "model":"galaxy s20 fe"
+  "model":"galaxy s20 fe",
   "ram":"8 gb",
   "primary camera":"triple camera 12 mp,12 mp,8 mp",
   "secondary camera":"32 mp", 
@@ -119,7 +119,7 @@
   "company":"flipkart",
   "product":"mobile phone,smart phone,phone,mobile",
   "brand":"samsung",
-  "model":"galaxy s20 fe"
+  "model":"galaxy s20 fe",
   "ram":"8 gb",
   "primary camera":"triple camera 12 mp,12 mp,8 mp",
   "secondary camera":"32 mp", 
@@ -146,7 +146,7 @@
   "company":"flipkart",
   "product":"mobile phone,smart phone,phone,mobile",
   "brand":"samsung",
-  "model":"galaxy s20 fe"
+  "model":"galaxy s20 fe",
   "ram":"8 gb",
   "primary camera":"triple camera 12 mp,12 mp,8 mp",
   "secondary camera":"32 mp", 
@@ -173,7 +173,7 @@
   "company":"flipkart",
   "product":"mobile phone,smart phone,phone,mobile",
   "brand":"samsung",
-  "model":"galaxy s20 fe"
+  "model":"galaxy s20 fe",
   "ram":"8 gb",
   "primary camera":"triple camera 12 mp,12 mp,8 mp",
   "secondary camera":"32 mp", 
@@ -200,7 +200,7 @@
   "company":"flipkart",
   "product":"mobile phone,smart phone,phone,mobile",
   "brand":"samsung",
-  "model":"galaxy s20 ultra"
+  "model":"galaxy s20 ultra",
   "ram":"12 gb",
   "primary camera":"triple camera 108 mp,48 mp,12 mp+vga depth",
   "secondary camera":"40 mp", 
@@ -227,7 +227,7 @@
   "company":"amazon",
   "product":"mobile phone,smart phone,phone,mobile",
   "brand":"samsung",
-  "model":"galaxy s20 ultra"
+  "model":"galaxy s20 ultra",
   "ram":"12 gb",
   "primary camera":"triple camera 108 mp,48 mp,12 mp+vga depth",
   "secondary camera":"40 mp", 
@@ -254,7 +254,7 @@
   "company":"amazon",
   "product":"mobile phone,smart phone,phone,mobile",
   "brand":"samsung",
-  "model":"galaxy s20 ultra"
+  "model":"galaxy s20 ultra",
   "ram":"12 gb",
   "primary camera":"triple camera 108 mp,48 mp,12 mp+vga depth",
   "secondary camera":"40 mp", 
@@ -281,7 +281,7 @@
   "company":"amazon",
   "product":"mobile phone,smart phone,phone,mobile",
   "brand":"samsung",
-  "model":"galaxy s20 ultra"
+  "model":"galaxy s20 ultra",
   "ram":"12 gb",
   "primary camera":"triple camera 108 mp,48 mp,12 mp+vga depth",
   "secondary camera":"40 mp", 
@@ -308,7 +308,7 @@
   "company":"amazon",
   "product":"mobile phone,smart phone,phone,mobile",
   "brand":"apple",
-  "model":"iphone 12"
+  "model":"iphone 12",
   "ram":"4 gb",
   "primary camera":"double camera 12 mp,12 mp",
   "secondary camera":"12 mp", 
@@ -335,7 +335,7 @@
   "company":"amazon",
   "product":"mobile phone,smart phone,phone,mobile",
   "brand":"apple",
-  "model":"iphone 12"
+  "model":"iphone 12",
   "ram":"4 gb",
   "primary camera":"double camera 12 mp,12 mp",
   "secondary camera":"12 mp", 
@@ -362,7 +362,7 @@
   "company":"amazon",
   "product":"mobile phone,smart phone,phone,mobile",
   "brand":"apple",
-  "model":"iphone 12"
+  "model":"iphone 12",
   "ram":"4 gb",
   "primary camera":"double camera 12 mp,12 mp",
   "secondary camera":"12 mp", 
@@ -389,7 +389,7 @@
   "company":"amazon",
   "product":"mobile phone,smart phone,phone,mobile",
   "brand":"apple",
-  "model":"iphone 12"
+  "model":"iphone 12",
   "ram":"4 gb",
   "primary camera":"double camera 12 mp,12 mp",
   "secondary camera":"12 mp", 
@@ -416,7 +416,7 @@
   "company":"amazon",
   "product":"mobile phone,smart phone,phone,mobile",
   "brand":"apple",
-  "model":"iphone 12"
+  "model":"iphone 12",
   "ram":"4 gb",
   "primary camera":"double camera 12 mp,12 mp",
   "secondary camera":"12 mp", 
@@ -443,7 +443,7 @@
   "company":"amazon",
   "product":"mobile phone,smart phone,phone,mobile",
   "brand":"apple",
-  "model":"iphone 12"
+  "model":"iphone 12",
   "ram":"4 gb",
   "primary camera":"double camera 12 mp,12 mp",
   "secondary camera":"12 mp", 
@@ -470,7 +470,7 @@
   "company":"amazon",
   "product":"mobile phone,smart phone,phone,mobile",
   "brand":"apple",
-  "model":"iphone 12"
+  "model":"iphone 12",
   "ram":"4 gb",
   "primary camera":"double camera 12 mp,12 mp",
   "secondary camera":"12 mp", 
@@ -497,7 +497,7 @@
   "company":"flipkart",
   "product":"mobile phone,smart phone,phone,mobile",
   "brand":"apple",
-  "model":"iphone 12"
+  "model":"iphone 12",
   "ram":"4 gb",
   "primary camera":"double camera 12 mp,12 mp",
   "secondary camera":"12 mp", 
@@ -524,7 +524,7 @@
   "company":"flipkart",
   "product":"mobile phone,smart phone,phone,mobile",
   "brand":"apple",
-  "model":"iphone 12"
+  "model":"iphone 12",
   "ram":"4 gb",
   "primary camera":"double camera 12 mp,12 mp",
   "secondary camera":"12 mp", 
@@ -551,7 +551,7 @@
   "company":"flipkart",
   "product":"mobile phone,smart phone,phone,mobile",
   "brand":"apple",
-  "model":"iphone 12"
+  "model":"iphone 12",
   "ram":"4 gb",
   "primary camera":"double camera 12 mp,12 mp",
   "secondary camera":"12 mp", 
@@ -578,7 +578,7 @@
   "company":"flipkart",
   "product":"mobile phone,smart phone,phone,mobile",
   "brand":"apple",
-  "model":"iphone 12"
+  "model":"iphone 12",
   "ram":"4 gb",
   "primary camera":"double camera 12 mp,12 mp",
   "secondary camera":"12 mp", 
@@ -605,7 +605,7 @@
   "company":"flipkart",
   "product":"mobile phone,smart phone,phone,mobile",
   "brand":"apple",
-  "model":"iphone 12"
+  "model":"iphone 12",
   "ram":"4 gb",
   "primary camera":"double camera 12 mp,12 mp",
   "secondary camera":"12 mp", 
@@ -632,7 +632,7 @@
   "company":"flipkart",
   "product":"mobile phone,smart phone,phone,mobile",
   "brand":"apple",
-  "model":"iphone 12"
+  "model":"iphone 12",
   "ram":"4 gb",
   "primary camera":"double camera 12 mp,12 mp",
   "secondary camera":"12 mp", 
