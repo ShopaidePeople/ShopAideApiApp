@@ -142,7 +142,7 @@ def featureIdentificationFunction():
 @app.route('/getProducts')
 def getProductsFunction():
     uid = request.args.get('uid')
-    features_collection = mongo.db[str(uid)+'features']
+    features_collection = mongo.db[str(uid)+'features'].find()
 
     uid = str(uid)+'products'
     
@@ -157,7 +157,7 @@ def getProductsFunction():
         absent_feature = 0
         features_count =0 
         print(features_collection)
-        for val in features_collection.keys():
+        for val in features_collection:
             print(val)
             features_count+=1
             key_in_val = val#val.keys()[0]
