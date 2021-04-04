@@ -223,7 +223,7 @@ def getRankProductsFunc():
             i[val]['price'] = i[val]['price'].replace(',', '')
             if(int(i[val]['price'])>int(max_price)):
                 max_price = int(i[val]['price'])
-            if(int(i[val]['deliveryFee']>int(max_deliveryFee))):
+            if(int(i[val]['deliveryFee'])>int(max_deliveryFee)):
                 max_deliveryFee = int(i[val]['deliveryFee'])
             
     collections = mongo.db[uid].find()
