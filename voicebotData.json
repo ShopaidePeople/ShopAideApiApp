@@ -1,0 +1,77 @@
+{
+  "reply" :
+  [
+	{ "mesg":"I want samsung galaxy s20",
+	  "answer" : [
+					"Okay. I will now load the results." ,
+					"Cool. I will now load the results." ,
+					"Have a great shopping Experience. Loading results?" ,
+					"Loading your results…" ,
+					"Results in process……." ,
+					" Please wait till I load the results. "
+                                                    ]
+} ,
+{"mesg":"I want samsung galaxy s20 fe" ,
+"answer": [
+					"Okay. I will now load the results." ,
+					"Cool. I will now load the results." ,
+					"Have a great shopping Experience. Loading results?" ,
+					"Loading your results…" ,
+					"Results in process……." ,
+					" Please wait till I load the results. "
+				    ]
+
+},
+{"mesg":"I want samsung galaxy s20 plus",
+"answer" : [
+					"Okay. I will now load the results." ,
+					"Cool. I will now load the results." ,
+					"Have a great shopping Experience. Loading results?" ,
+					"Loading your results…" ,
+					"Results in process……." ,
+					" Please wait till I load the results. "
+ 					]
+  },
+{ "mesg":"I want apple iphone 12",
+"answer" : [
+					"Okay. I will now load the results." ,
+					"Cool. I will now load the results." ,
+					"Have a great shopping Experience. Loading results?" ,
+					"Loading your results…" ,
+					"Results in process……." ,
+					" Please wait till I load the results. "
+					]
+  },
+{"mesg":"Looking for some phones worth 10,000 rupees",
+"answer" :  [
+						"Are you looking for any specific RAM?",
+						"Do you prefer any RAM? " ,
+						"Do you have any preference for ram?" ,
+						"What about RAM?",
+						"Are you in need of any specific RAM?" ,
+						"What RAM do you prefer?"
+					]  
+},
+{"mesg":"Let it be 3 gb ram",
+ "answer" : [
+			"Any idea about storage?",
+			"Are you looking for specific storage?",
+			"Do you have any preference for storage? ",
+			"Let me know your storage need",
+			"Tell about storage requirements, if you have any? "
+		   ]
+
+},
+{"mesg":"I want one with 32 gb storage" ,
+"answer":[
+					"Cool. I will get you the results",
+					"Loading the results….",
+					"Let me load your results",
+					"Getting results for you… Be ready...",
+					"I’m done now. Loading results for you."
+				]
+
+}
+
+  ]
+}
