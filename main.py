@@ -79,13 +79,13 @@ def chatbot():
     data = json.load(f)
     result_text = ""
     for i in data['reply']:
-        if(i["mesg"].lower()==msg.lower()):
+        if(i["mesg"].lower().strip()==msg.lower().strip()):
             lgth = len(i["answer"])
             rnd = random.randint(0,lgth-1)
             result_text = i["answer"][rnd] 
             break
     for i in data['reply']:
-        if((msg.lower() in i["mesg"].lower())):
+        if((msg.lower().strip() in i["mesg"].lower().strip())):
             lgth = len(i["answer"])
             rnd = random.randint(0,lgth)
             result_text = i["answer"][rnd]
