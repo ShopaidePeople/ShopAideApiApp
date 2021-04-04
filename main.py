@@ -80,7 +80,7 @@ def chatbot():
     for i in data['reply']:
         if(i["mesg"]==msg):
             lgth = len(i["answer"])
-            rnd = random.randint(0,lgth)
+            rnd = random.randint(0,lgth-1)
             result_text = i["answer"][rnd] 
             break
     for i in data['reply']:
