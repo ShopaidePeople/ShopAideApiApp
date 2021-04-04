@@ -10,6 +10,8 @@ import uuid
 from flask_pymongo import PyMongo
 from spacymodel import SpacyModel
 
+import json
+
 app=Flask(__name__)
 
 app.config["MONGO_URI"] = "mongodb+srv://Ashwin:preetha11319@chatbot.a0mji.mongodb.net/trial?retryWrites=true&w=majority"
@@ -65,6 +67,72 @@ def textToSpeechFunc():
     
 
 #getting params passed with url - a = request.args.get('user')
+
+@app.route('/getBotReply')
+def chatbot():
+    uid = request.args.get('uid')
+    msg = request.args.get('msg')
+    uid = str(uid)+'chat'
+    f = open('./voicebotData.json',)
+    data = json.load(f)
+    result_text = ""
+    for i in data['reply']:
+        if(i["mesg"]==msg):
+            lgth = len(i["answer"])
+            rnd = random.randint(0,lgth)
+            result_text = i["answer"][rnd] 
+            break
+    for i in data['reply']:
+        if((msg in i["mesg"])):
+            lgth = len(i["answer"])
+            rnd = random.randint(0,lgth)
+            result_text = i["answer"][rnd]
+            break
+    if(result_text==""):
+        result_text = "Sorry. I can't understand. "
+    
+    user_collection = mongo.db[uid]
+    
+    collections = mongo.db[uid]
+    collections.insert_one({"user":msg})
+    collections.insert_one({"bot":result_text})
+    
+    print("===========================================================================")
+
+    return result_text
+
+
+
+@app.route('/featureIdentification')
+def featureIdentificationFunction():
+
+
+    uid = request.args.get('uid')
+    collections  = mongo.db[(str(uid)+'chat')].find()
+    uid = str(uid)+'features'
+
+
+    user_collection = mongo.db[uid]
+    
+    result_ner = {}
+    for i in collections:
+        if("user" in  i):
+            ner_output = sm.testing_func('./def',i["user"])
+            for val in ner_output:
+                print("val is " , val)
+                if(val=='_id'):
+                    continue
+                result_ner[val] = ner_output[val]
+            print("ner output is" ,ner_output)
+    
+    user_collection.insert_one(result_ner)
+    del result_ner['_id']
+    print("result ner is",result_ner)
+    return (result_ner)
+
+
+
+
 
 @app.route('/updateNerModel',methods=['GET','POST'])
 def updateNerModelFunc():
