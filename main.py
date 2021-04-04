@@ -288,7 +288,7 @@ def getRankProductsFunc():
                 deliveryTimeRatings += 1.0
                 
 
-            deliveryFeeRatings = int(val['deliveryFee'])/max_deliveryFee*100
+            deliveryFeeRatings = int(i[val]['deliveryFee'])/max_deliveryFee*100
 
             replacementRatings = 0
             if(i[val]['replacement']=="true"):
