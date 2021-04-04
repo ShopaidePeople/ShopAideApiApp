@@ -165,21 +165,28 @@ def getProductsFunction():
         print(features_collection)
         for val in features_collection:
             print(val)
-            flag = true
+            flag = True
             key_in_val = val.keys()
             for kiv in key_in_val:
+                if(kiv=='_id'):
+                    continue
                 features_count+=1
+                if(kiv not in i.keys()):
+                    absent_feature+=1
+                    continue
                 if(i[kiv]==val[kiv]):
                     present_feature+=1
                 else:
                     absent_feature+=1
                 if(absent_feature>0):
-                    flag = false
+                    flag = False
                     break
-            if(flag==false):
+            if(flag==False):
                 break
         if(present_feature == features_count):
-            result_data[index_var] = val
+            k={}
+            k[str(index_var)] = i
+            result_data[str(index_var)] = i
             index_var+=1
 
     collections = mongo.db[uid]
@@ -211,36 +218,41 @@ def getRankProductsFunc():
 
     for i in collections:
         for val in i:
-            if(int(val['price'])>int(max_price)):
-                max_price = int(val['price'])
-            if(int(val['deliveryFee']>int(max_deliveryFee))):
-                max_deliveryFee = int(val['deliveryFee'])
-
+            if(val=='_id'):
+                continue
+            i[val]['price'] = i[val]['price'].replace(',', '')
+            if(int(i[val]['price'])>int(max_price)):
+                max_price = int(i[val]['price'])
+            if(int(i[val]['deliveryFee']>int(max_deliveryFee))):
+                max_deliveryFee = int(i[val]['deliveryFee'])
+            
     collections = mongo.db[uid].find()
 
     for i in collections:
         for val in i:
-            users = int(val['totalNoofRating'])
-            if(val['company']=='amazon'):
-                star1 = int(val['1star'])
+            if(val=='_id'):
+                continue
+            users = int(i[val]['totalNoofRating'])
+            if(i[val]['company']=='amazon'):
+                star1 = int(i[val]['1star'])
                 stars1 = (int(star1)/100)*users
-                star2 = int(val['2star'])
+                star2 = int(i[val]['2star'])
                 stars2 = (int(star2)/100)*users
-                star3 = int(val['3star'])
+                star3 = int(i[val]['3star'])
                 stars3 = (int(star3)/100)*users
-                star4 = int(val['4star'])
+                star4 = int(i[val]['4star'])
                 stars4 = (int(star4)/100)*users
-                star5 = int(val['5star'])
+                star5 = int(i[val]['5star'])
                 stars5 = (int(star5)/100)*users
                 ratings_ratio = 0.0
             else:
-                stars1 = int(val['1star'])
-                stars2 = int(val['2star'])
-                stars3 = int(val['3star'])
-                stars4 = int(val['4star'])
-                stars5 = int(val['5star'])
+                stars1 = int(i[val]['1star'])
+                stars2 = int(i[val]['2star'])
+                stars3 = int(i[val]['3star'])
+                stars4 = int(i[val]['4star'])
+                stars5 = int(i[val]['5star'])
                 ratings_ratio =0.0
-                
+                    
             if(users!=0):
                 ratings_ratio+= ((stars1+stars2+stars3)/(stars1+stars2+stars3+stars4+stars5))*0.175
                 ratings_ratio += ((stars1+stars2+stars3+stars4+stars5)/(stars4+stars5))*0.175
@@ -249,10 +261,10 @@ def getRankProductsFunc():
                 ratings_ratio += 1.0
 
 
-            price_ratio = (int(val['price'])/max_price)*0.25
-            
+            price_ratio = (int(i[val]['price'])/max_price)*0.25
+                
             total_reviews_rate = 0.0
-            total_review_number = int(val['totalNoofRating'])
+            total_review_number = int(i[val]['totalNoofRating'])
 
             if(total_review_number<=500):
                 total_reviews_rate+=1
@@ -264,20 +276,20 @@ def getRankProductsFunc():
                 total_reviews_rate+=0.25
 
             deliveryTimeRatings = 0
-            if(val['deliveryTime']<=1):
+            if(i[val]['deliveryTime']<=1):
                 deliveryTimeRatings += 0.25
-            elif(val['deliveryTime']<=3):
+            elif(i[val]['deliveryTime']<=3):
                 deliveryTimeRatings += 0.5
-            elif(val['deliveryTime']<=7):
+            elif(i[val]['deliveryTime']<=7):
                 deliveryTimeRatings += 0.75
             else:
                 deliveryTimeRatings += 1.0
-            
+                
 
             deliveryFeeRatings = int(val['deliveryFee'])/max_deliveryFee*100
 
             replacementRatings = 0
-            if(val['replacement']=="true"):
+            if(i[val]['replacement']=="true"):
                 replacementRatings+=0.5
             else:
                 replacementRatings+=1.0
@@ -288,10 +300,15 @@ def getRankProductsFunc():
             print(ranking_pnt)
             #filterr = {'asin':i['asin']}
             newvalues = {"$set" : {'ranking_points':ranking_pnt}}
-            mongo.db[s].update_one(val,newvalues)
+            mongo.db[uid].update_one(val,newvalues)
+    
+    
+    #mongo.db[uid].find().sort("ranking_points")
+
 
     #required --- mongo.db[unique_id].drop()
     return '<h1>Products ranked successfully</h1>'
+
 
 if __name__ == "__main__":
     #app.debug=True
