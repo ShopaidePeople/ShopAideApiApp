@@ -156,9 +156,11 @@ def getProductsFunction():
         present_feature = 0
         absent_feature = 0
         features_count =0 
-        for val in features_collection:
+        print(features_collection)
+        for val in features_collection.keys():
+            print(val)
             features_count+=1
-            key_in_val = val.keys()[0]
+            key_in_val = val#val.keys()[0]
             if(i[key_in_val]==val[key_in_val]):
                 present_feature+=1
             else:
