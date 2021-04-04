@@ -74,6 +74,10 @@ def chatbot():
     uid = request.args.get('uid')
     msg = request.args.get('msg')
     msg = str(msg)
+    if(msg[0]=="\""):
+       msg = msg[1:]
+    if(msg[len(msg)]-1]=="\""):
+        msg = msg[:len(msg)-1]
     uid = str(uid)+'chat'
     f = open('./voicebotData.json',)
     data = json.load(f)
