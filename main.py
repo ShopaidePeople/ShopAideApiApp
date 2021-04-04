@@ -23,6 +23,12 @@ app.secret_key="good"
 def hello_world():
     return "HI"
 
+@app.route('/welcome')
+def welcome():
+    id = uuid.uuid4()
+    unique_id = str(id)
+    return unique_id
+
 @app.route('/speechToText',methods=['POST'])
 def speechToTextFunc():
     
