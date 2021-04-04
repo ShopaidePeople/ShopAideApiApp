@@ -69,7 +69,7 @@ def textToSpeechFunc():
 
 #getting params passed with url - a = request.args.get('user')
 
-@app.route('/getBotReply')
+@app.route('/getBotReply',methods=['GET','POST'])
 def chatbot():
     uid = request.args.get('uid')
     msg = request.args.get('msg')
@@ -104,7 +104,7 @@ def chatbot():
 
 
 
-@app.route('/featureIdentification')
+@app.route('/featureIdentification',methods=['GET','POST'])
 def featureIdentificationFunction():
 
 
