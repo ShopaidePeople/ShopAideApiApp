@@ -3,43 +3,23 @@
   [
 	{ "mesg":"I want samsung galaxy s20",
 	  "answer" : [
-					"Okay. I will now load the results." ,
-					"Cool. I will now load the results." ,
-					"Have a great shopping Experience. Loading results?" ,
-					"Loading your results…" ,
-					"Results in process……." ,
-					" Please wait till I load the results. "
+					"Okay. I will now load the results." 
                                                     ]
 } ,
 {"mesg":"I want samsung galaxy s20 fe" ,
 "answer": [
-					"Okay. I will now load the results." ,
-					"Cool. I will now load the results." ,
-					"Have a great shopping Experience. Loading results?" ,
-					"Loading your results…" ,
-					"Results in process……." ,
-					" Please wait till I load the results. "
+					"Okay. I will now load the results." 
 				    ]
 
 },
 {"mesg":"I want samsung galaxy s20 plus",
 "answer" : [
-					"Okay. I will now load the results." ,
-					"Cool. I will now load the results." ,
-					"Have a great shopping Experience. Loading results?" ,
-					"Loading your results…" ,
-					"Results in process……." ,
-					" Please wait till I load the results. "
+					"Okay. I will now load the results." 
  					]
   },
 { "mesg":"I want apple iphone 12",
 "answer" : [
-					"Okay. I will now load the results." ,
-					"Cool. I will now load the results." ,
-					"Have a great shopping Experience. Loading results?" ,
-					"Loading your results…" ,
-					"Results in process……." ,
-					" Please wait till I load the results. "
+					"Okay. I will now load the results." 
 					]
   },
 {"mesg":"Looking for some phones worth 10,000 rupees",
@@ -63,12 +43,7 @@
 
 },
 {"mesg":"I want one with 32 gb storage" ,
-"answer":[
-					"Cool. I will get you the results",
-					"Loading the results….",
-					"Let me load your results",
-					"Getting results for you… Be ready...",
-					"I’m done now. Loading results for you."
+"answer":["Okay. I will now load the results." 
 				]
 
 }
