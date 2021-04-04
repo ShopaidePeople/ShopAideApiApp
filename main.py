@@ -104,7 +104,7 @@ def chatbot():
     collections = mongo.db[uid]
     collections.insert_one({"user":msg})
     collections.insert_one({"bot":result_text})
-    
+    f.close()
     print("===========================================================================")
 
     return result_text
@@ -139,6 +139,42 @@ def featureIdentificationFunction():
     return (result_ner)
 
 
+@app.route('/getProducts')
+def getProductsFunction():
+    uid = request.args.get('uid')
+    features_collection = mongo.db[str(uid)+'features']
+
+    uid = str(uid)+'products'
+    
+    f = open('./productData.json',)
+    data = json.load(f)
+
+    result_data = {}
+    index_var = 0
+
+    for i in data['products']:
+        present_feature = 0
+        absent_feature = 0
+        features_count =0 
+        for val in features_collection:
+            features_count+=1
+            key_in_val = val.keys()[0]
+            if(i[key_in_val]==val[key_in_val]):
+                present_feature+=1
+            else:
+                absent_feature+=1
+            if(absent_feature>0):
+                break
+        if(present_feature == features_count):
+            result_data[index_var] = val
+            index_var+=1
+
+    collections = mongo.db[uid]
+    collections.insert_one(result_data)
+
+    
+    f.close()
+    return "Done"
 
 
 
@@ -149,126 +185,101 @@ def updateNerModelFunc():
     sm.modelPreparation(None,"en_core_web_sm",'./def',10)
     return '<h1>Successfully upadted NER model</h1>'
 
+
 @app.route('/getRankProducts',methods=['GET','POST'])
 def getRankProductsFunc():
 
-    unique_id = request.args.get('uid')
-    sentence = request.args.get('uinput') 
+    uid = request.args.get('uid')
+    uid = str(uid)+'products'
 
-    ner_output = sm.testing_func('./def',sentence)
-
-    print(ner_output)
-
-    unique_id_text = str(unique_id)+"text"
-    inputs = mongo.db[unique_id_text]
-    for keys in ner_output:
-        insert_dict = {keys:ner_output[keys]} 
-        inputs.insert_one(insert_dict)
-
-    true = True
-    false = False
-    #To generate a unique id and create a table with that id for a user for one session
-    id = uuid.uuid4()
-    unique_id = str(id)
-
-    user_collection = mongo.db[unique_id]
-    print(unique_id)
-    
-    s = unique_id 
-    
-    collections = mongo.db[s]
-    
-    url = "https://amazon-product-reviews-keywords.p.rapidapi.com/product/search"
-    querystring = {"keyword":"samsung galaxy s20","country":"US","category":"aps"}
-    headers = {'x-rapidapi-key': "dc35a0cc76msh899ec247fe716fdp1d0585jsn841002085e3e",'x-rapidapi-host': "amazon-product-reviews-keywords.p.rapidapi.com"}
-    response = requests.request("GET", url, headers=headers, params=querystring)
-    
-    amazon_dict = {}
-    amazon_dict['amazon'] = json.loads(response.text)
-    
-    for i in amazon_dict['amazon']['products']:
-        collections.insert_one(i)
-
-    collections = mongo.db[s].find()
+    max_price = -999999
+    max_deliveryFee = -999999
+    collections = mongo.db[uid].find() 
 
     for i in collections:
-        if("Sponsored Ad" in i['title']):
-            mongo.db[s].delete_one(i)
-        if(int(i['price']['current_price'])==0):
-            mongo.db[s].delete_one(i)
+        for val in i:
+            if(int(val['price'])>int(max_price)):
+                max_price = int(val['price'])
+            if(int(val['deliveryFee']>int(max_deliveryFee))):
+                max_deliveryFee = int(val['deliveryFee'])
 
-    collections = mongo.db[s].find()
-    for i in collections:
-        url = "https://amazon23.p.rapidapi.com/reviews"
-        querystring = {"asin":i['asin'],"sort_by":"recent","country":"US"}
-        headers = {'x-rapidapi-key': "e8b9bd5ec6msha82feacde4f4892p10370ejsn6fd0e65335d6",'x-rapidapi-host': "amazon23.p.rapidapi.com"}
-        response = requests.request("GET", url, headers=headers, params=querystring)
-        results = response.json()
-
-        filterr = { 'asin': i['asin'] } 
-        newvalues = { "$set": { 'stars_stat': results['stars_stat'] } } 
-        mongo.db[s].update_one(filterr, newvalues)
-
-
-    max_price = -999999.0
-    collections = mongo.db[s].find() 
+    collections = mongo.db[uid].find()
 
     for i in collections:
-        if(float(i['price']['current_price'])>float(max_price)):
-            max_price = float(i['price']['current_price'])
+        for val in i:
+            users = int(val['totalNoofRating'])
+            if(val['company']=='amazon'):
+                star1 = int(val['1star'])
+                stars1 = (int(star1)/100)*users
+                star2 = int(val['2star'])
+                stars2 = (int(star2)/100)*users
+                star3 = int(val['3star'])
+                stars3 = (int(star3)/100)*users
+                star4 = int(val['4star'])
+                stars4 = (int(star4)/100)*users
+                star5 = int(val['5star'])
+                stars5 = (int(star5)/100)*users
+                ratings_ratio = 0.0
+            else:
+                stars1 = int(val['1star'])
+                stars2 = int(val['2star'])
+                stars3 = int(val['3star'])
+                stars4 = int(val['4star'])
+                stars5 = int(val['5star'])
+                ratings_ratio =0.0
+                
+            if(users!=0):
+                ratings_ratio+= ((stars1+stars2+stars3)/(stars1+stars2+stars3+stars4+stars5))*0.175
+                ratings_ratio += ((stars1+stars2+stars3+stars4+stars5)/(stars4+stars5))*0.175
+            else:
+                ratings_ratio+=1.0
+                ratings_ratio += 1.0
 
-    collections = mongo.db[s].find()
 
-    for i in collections:
-        users = int(i['reviews']['total_reviews'])
-        star1 = (i['stars_stat']['1'])
-        stars1 = (int(star1[:len(star1)-1])/100)*users
-        star2 = (i['stars_stat']['2'])
-        stars2 = (int(star2[:len(star2)-1])/100)*users
-        star3 = (i['stars_stat']['3'])
-        stars3 = (int(star3[:len(star3)-1])/100)*users
-        star4 = (i['stars_stat']['4'])
-        stars4 = (int(star4[:len(star4)-1])/100)*users
-        star5 = (i['stars_stat']['5'])
-        stars5 = (int(star5[:len(star5)-1])/100)*users
-        ratings_ratio = 0.0
-        if(users!=0):
-            ratings_ratio += ((stars1+stars2+stars3)/(stars1+stars2+stars3+stars4+stars5))*0.225
-        else:
-            ratings_ratio+=1.0
-        if((stars4+stars5)!=0):
-            ratings_ratio += ((stars1+stars2+stars3+stars4+stars5)/(stars4+stars5))*0.225
-        else:
-            ratings_ratio += 1.0
+            price_ratio = (int(val['price'])/max_price)*0.25
+            
+            total_reviews_rate = 0.0
+            total_review_number = int(val['totalNoofRating'])
+
+            if(total_review_number<=500):
+                total_reviews_rate+=1
+            elif(total_review_number<=1000):
+                total_reviews_rate+=0.75
+            elif(total_review_number<=5000):
+                total_reviews_rate+=0.5
+            else:
+                total_reviews_rate+=0.25
+
+            deliveryTimeRatings = 0
+            if(val['deliveryTime']<=1):
+                deliveryTimeRatings += 0.25
+            elif(val['deliveryTime']<=3):
+                deliveryTimeRatings += 0.5
+            elif(val['deliveryTime']<=7):
+                deliveryTimeRatings += 0.75
+            else:
+                deliveryTimeRatings += 1.0
+            
+
+            deliveryFeeRatings = int(val['deliveryFee'])/max_deliveryFee*100
+
+            replacementRatings = 0
+            if(val['replacement']=="true"):
+                replacementRatings+=0.5
+            else:
+                replacementRatings+=1.0
+
+            ranking_pnt = ratings_ratio + price_ratio + (total_reviews_rate*0.1) + (deliveryTimeRatings*0.1) + (deliveryFeeRatings*0.1) +(replacementRatings*0.1)
 
 
-        price_ratio = (float(i['price']['current_price'])/max_price)*0.35
-        
-        total_reviews_rate = 0.0
-        total_review_number = int(i['reviews']['total_reviews'])
-
-        if(total_review_number<=500):
-            total_reviews_rate+=1
-        elif(total_review_number<=1000):
-            total_reviews_rate+=0.75
-        elif(total_review_number<=5000):
-            total_reviews_rate+=0.5
-        else:
-            total_reviews_rate+=0.25
-
-        ranking_pnt = ratings_ratio + price_ratio + (total_reviews_rate*0.1)
-
-        if("Renewed" in i['title']):
-            ranking_pnt += 1.0
-
-        print(ranking_pnt)
-        filterr = {'asin':i['asin']}
-        newvalues = {"$set" : {'ranking_points':ranking_pnt}}
-        mongo.db[s].update_one(filterr,newvalues)
+            print(ranking_pnt)
+            #filterr = {'asin':i['asin']}
+            newvalues = {"$set" : {'ranking_points':ranking_pnt}}
+            mongo.db[s].update_one(val,newvalues)
 
     #required --- mongo.db[unique_id].drop()
     return '<h1>Products ranked successfully</h1>'
-          
+
 if __name__ == "__main__":
     #app.debug=True
     app.run(port="5000")
