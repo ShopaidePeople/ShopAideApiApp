@@ -165,13 +165,18 @@ def getProductsFunction():
         print(features_collection)
         for val in features_collection:
             print(val)
-            features_count+=1
-            key_in_val = val#val.keys()[0]
-            if(i[key_in_val]==val[key_in_val]):
-                present_feature+=1
-            else:
-                absent_feature+=1
-            if(absent_feature>0):
+            flag = true
+            key_in_val = val.keys()
+            for kiv in key_in_val:
+                features_count+=1
+                if(i[kiv]==val[kiv]):
+                    present_feature+=1
+                else:
+                    absent_feature+=1
+                if(absent_feature>0):
+                    flag = false
+                    break
+            if(flag==false):
                 break
         if(present_feature == features_count):
             result_data[index_var] = val
