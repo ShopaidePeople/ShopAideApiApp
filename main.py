@@ -73,6 +73,7 @@ def textToSpeechFunc():
 def chatbot():
     uid = request.args.get('uid')
     msg = request.args.get('msg')
+    print(msg)
     msg = str(msg)
     if(msg[0]=="\""):
        msg = msg[1:]
