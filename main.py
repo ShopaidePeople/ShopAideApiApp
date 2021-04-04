@@ -73,18 +73,19 @@ def textToSpeechFunc():
 def chatbot():
     uid = request.args.get('uid')
     msg = request.args.get('msg')
+    msg = str(msg)
     uid = str(uid)+'chat'
     f = open('./voicebotData.json',)
     data = json.load(f)
     result_text = ""
     for i in data['reply']:
-        if(i["mesg"]==msg):
+        if(i["mesg"].lower()==msg.lower()):
             lgth = len(i["answer"])
             rnd = random.randint(0,lgth-1)
             result_text = i["answer"][rnd] 
             break
     for i in data['reply']:
-        if((msg in i["mesg"])):
+        if((msg.lower() in i["mesg"].lower())):
             lgth = len(i["answer"])
             rnd = random.randint(0,lgth)
             result_text = i["answer"][rnd]
