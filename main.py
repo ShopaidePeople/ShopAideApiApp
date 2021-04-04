@@ -98,6 +98,7 @@ def chatbot():
     if(result_text==""):
         result_text = "Sorry. I can't understand. "
     
+    print(uid)
     user_collection = mongo.db[uid]
     
     collections = mongo.db[uid]
