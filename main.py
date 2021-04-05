@@ -334,7 +334,7 @@ def getRankProductsFunc():
         results_dict['products'].append(i)
     print("success")
     print(results_dict)
-    return results_dict
+    return json.stringify(results_dict)
 
 if __name__ == "__main__":
     #app.debug=True
