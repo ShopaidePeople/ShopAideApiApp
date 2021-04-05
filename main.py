@@ -331,11 +331,12 @@ def getRankProductsFunc():
         
     collections = mongo.db[uid].find()
     for i in collections:
+        del i['_id']
         results_dict['products'].append(i)
     print("success")
     print(results_dict)
-    return results_dict['products']
-    #return json.dumps(results_dict)
+    #return results_dict['products']
+    return json.dumps(results_dict)
     #return json.stringify(results_dict)
 
 if __name__ == "__main__":
