@@ -83,8 +83,11 @@ def chatbot():
     f = open('./voicebotData.json',)
     data = json.load(f)
     result_text = ""
+    msg.replace(" ","")
+    dict_mesg = i["mesg"]
+    dict_mesg.replace(" ","")
     for i in data['reply']:
-        if(i["mesg"].lower().strip()==msg.lower().strip()):
+        if(dict_mesg.lower()==msg.lower()):
             lgth = len(i["answer"])
             if(lgth==1):
                 result_text = i["answer"][0]
@@ -93,7 +96,7 @@ def chatbot():
             result_text = i["answer"][rnd] 
             break
     for i in data['reply']:
-        if((msg.lower().strip() in i["mesg"].lower().strip())):
+        if((msg.lower() in dict_mesg.lower())):
             lgth = len(i["answer"])
             if(lgth==1):
                 result_text = i["answer"][0]
