@@ -84,9 +84,9 @@ def chatbot():
     data = json.load(f)
     result_text = ""
     msg.replace(" ","")
-    dict_mesg = i["mesg"]
-    dict_mesg.replace(" ","")
     for i in data['reply']:
+        dict_mesg = i["mesg"]
+        dict_mesg.replace(" ","")
         if(dict_mesg.lower()==msg.lower()):
             lgth = len(i["answer"])
             if(lgth==1):
@@ -96,6 +96,8 @@ def chatbot():
             result_text = i["answer"][rnd] 
             break
     for i in data['reply']:
+        dict_mesg = i["mesg"]
+        dict_mesg.replace(" ","")
         if((msg.lower() in dict_mesg.lower())):
             lgth = len(i["answer"])
             if(lgth==1):
